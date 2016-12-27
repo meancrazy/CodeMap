@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="Common.Views.CodeMapMargin"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:domain="clr-namespace:Common.Domain"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" Width="200"
+             d:DataContext="{d:DesignData codeMap:CodeMapMarginViewModel, d:IsDesignTimeCreatable=False}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Common;component/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <DockPanel>
+        <GridSplitter DockPanel.Dock="Left" Width="4" DragDelta="ThumbOnDragDelta" />
+        <Grid DockPanel.Dock="Right">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <domain:FilterTextBox x:Name="FilterTextBox" Margin="2" Grid.Row="0" />
+            <TreeView x:Name="Items" Grid.Row="1"
+                      ItemTemplate="{StaticResource ItemTemplate}"
+                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                      BorderThickness="0">
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource {x:Type TreeViewItem}}">
+                        <Setter Property="IsExpanded" Value="True"/>
+                        <EventSetter Event="PreviewMouseLeftButtonUp" Handler="OnMouseLeftButtonUp"/>
+                    </Style>
+                </TreeView.ItemContainerStyle>
+            </TreeView>
+        </Grid>
+    </DockPanel>
+</UserControl>

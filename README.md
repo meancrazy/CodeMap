@@ -1,0 +1,1 @@
+Simple code map extension for VS 2015 or 2017 like http://supercharger.tools/.
